@@ -251,7 +251,7 @@ spec:
         spec:
           containers:
             - name: whereabouts
-              image: ghcr.io/georgenicoll/whereabouts:latest-amd64
+              image: ghcr.io/georgenicoll/whereabouts:latest-arm64
               resources:
                 requests:
                   cpu: "100m"
