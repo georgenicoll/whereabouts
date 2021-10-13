@@ -74,13 +74,13 @@ spec:
       hostNetwork: true      
       serviceAccountName: whereabouts
       nodeSelector:
-        beta.kubernetes.io/arch: arm64
+        kubernetes.io/arch: arm64
       tolerations:
       - operator: Exists
         effect: NoSchedule
       containers:
       - name: whereabouts
-        image: ghcr.io/georgenicoll/whereabouts:latest-arm64
+        image: docker.io/georgenicoll/whereabouts:latest-arm64
         env:
         - name: WHEREABOUTS_NAMESPACE
           valueFrom:
@@ -251,7 +251,7 @@ spec:
         spec:
           containers:
             - name: whereabouts
-              image: ghcr.io/georgenicoll/whereabouts:latest-arm64
+              image: docker.io/georgenicoll/whereabouts:latest-arm64
               resources:
                 requests:
                   cpu: "100m"
