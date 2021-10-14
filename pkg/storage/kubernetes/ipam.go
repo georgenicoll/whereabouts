@@ -30,6 +30,8 @@ import (
 // NewKubernetesIPAM returns a new KubernetesIPAM Client configured to a kubernetes CRD backend
 func NewKubernetesIPAM(containerID string, ipamConf whereaboutstypes.IPAMConfig) (*KubernetesIPAM, error) {
 	var namespace string
+	//George
+	logging.StdOutf("In NewKubernetesIPAM: container=%s, kubeConfig=%s", containerID, ipamConf.Kubernetes.KubeConfigPath)
 	if cfg, err := clientcmd.LoadFromFile(ipamConf.Kubernetes.KubeConfigPath); err != nil {
 		return nil, err
 	} else if ctx, ok := cfg.Contexts[cfg.CurrentContext]; ok && ctx != nil {
@@ -38,10 +40,15 @@ func NewKubernetesIPAM(containerID string, ipamConf whereaboutstypes.IPAMConfig)
 		return nil, fmt.Errorf("k8s config: namespace not present in context")
 	}
 
+	//George
+	logging.StdOutf("Calling NewClient: container=%s, kubeConfig=%s", containerID, ipamConf.Kubernetes.KubeConfigPath)
 	kubernetesClient, err := NewClient(ipamConf.Kubernetes.KubeConfigPath)
 	if err != nil {
 		return nil, fmt.Errorf("failed instantiating kubernetes client: %v", err)
 	}
+
+	//George
+	logging.StdOutf("Calling newKubernetesIPAM: container=%s, namespace=%s, kubeConfig=%s", containerID, namespace, ipamConf.Kubernetes.KubeConfigPath)
 	k8sIPAM := newKubernetesIPAM(containerID, ipamConf, namespace, *kubernetesClient)
 	return k8sIPAM, nil
 }

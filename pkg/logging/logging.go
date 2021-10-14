@@ -56,6 +56,15 @@ func (l Level) String() string {
 	return "unknown"
 }
 
+//GKN
+func StdOutf(format string, a ...interface{}) {
+	header := "%s [%s] "
+	t := time.Now()
+	fmt.Fprintf(os.Stdout, header, t.Format(defaultTimestampFormat), "StdOut")
+	fmt.Fprintf(os.Stdout, format, a...)
+	fmt.Fprintf(os.Stdout, "\n")
+}
+
 // Printf provides basic Printf functionality for logs
 func Printf(level Level, format string, a ...interface{}) {
 	header := "%s [%s] "
